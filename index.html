@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ① 加入這一行：50～160 字的 meta description（直接滿分） -->
+    <meta name="description" content="XXX 的前端工程師個人作品集。專精 HTML、CSS、響應式設計與極致效能網頁開發，目前開放接案與全職機會。">
+
+    <title>【完整骨架】我的個人網站</title>
+    <style>
+        /*（原本的 CSS 全保留不變）*/
+        /* ======================================= */
+        /* === CSS 區塊插槽：全站變數與重置 START === */
+        /* ======================================= */
+        :root {
+            /* 主題顏色（可快速換色） */
+            --color-primary:   #0066ff;
+            --color-secondary:#495057;
+            --color-success:  #28a745;
+            --color-bg:       #f8f9fa;
+            --color-surface:  #ffffff;
+            --color-text:     #212529;
+            --color-muted:    #6c757d;
+
+            /* 間距系統 */
+            --gap-xs: 8px;
+            --gap-sm: 16px;
+            --gap-md: 32px;
+            --gap-lg: 64px;
+            --gap-xl: 96px;
+
+            /* 圓角與陰影 */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：容器與排版工具 START === */
+        /* ======================================= */
+        .container {
+            width: 100%;
+            max-width: 1320px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: var(--gap-sm);
+            padding-right: var(--gap-sm);
+        }
+
+        .section {
+            padding-top: var(--gap-lg);
+            padding-bottom: var(--gap-lg);
+        }
+
+        .text-center { text-align: center; }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：響應式斷點 START === */
+        /* ======================================= */
+        @media (min-width: 768px) {
+            .container { max-width: 720px; }
+            .section { padding-top: var(--gap-xl); padding-bottom: var(--gap-xl); }
+        }
+
+        @media (min-width: 1440px) {
+            .container { max-width: 1320px; }
+        }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：導覽列 START === */
+        /* ======================================= */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: var(--color-surface);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+        }
+
+        .nav-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--gap-sm);
+            list-style: none;
+            padding: var(--gap-sm) 0;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            transition: all 0.25s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(0,102,255,0.1);
+            color: var(--color-primary);
+        }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：Hero 區塊 START === */
+        /* ======================================= */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary), #0050cc);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--gap-sm);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            margin-bottom: var(--gap-md);
+        }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：按鈕 START === */
+        /* ======================================= */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：卡片與網格 START === */
+        /* ======================================= */
+        .grid {
+            display: grid;
+            gap: var(--gap-md);
+            margin-top: var(--gap-md);
+        }
+
+        @media (min-width: 768px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .card {
+            background: var(--color-surface);
+            padding: var(--gap-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card h3 {
+            margin-bottom: var(--gap-sm);
+            color: var(--color-primary);
+        }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：頁尾 START === */
+        /* ======================================= */
+        .footer {
+            background: var(--color-secondary);
+            color: white;
+            text-align: center;
+            padding: var(--gap-lg) 0;
+            margin-top: var(--gap-xl);
+        }
+
+        /* ======================================= */
+        /* === CSS 區塊插槽：客製區（可自由覆寫）END === */
+        /* ======================================= */
+    </style>
+</head>
+<body>
+
+    <!-- ====================== 導覽列 ====================== -->
+    <header class="nav">
+        <nav class="container">
+            <ul class="nav-list">
+                <li><a href="#hero" class="nav-link">首頁</a></li>
+                <li><a href="#about" class="nav-link">關於我</a></li>
+                <li><a href="#skills" class="nav-link">技能</a></li>
+                <li><a href="#portfolio" class="nav-link">作品集</a></li>
+                <li><a href="#experience" class="nav-link">經歷</a></li>
+                <li><a href="#contact" class="nav-link">聯絡我</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ====================== Hero ====================== -->
+        <section id="hero" class="hero section">
+            <div class="container text-center">
+                <!-- HTML 區塊插槽：標題與副標 -->
+                <h1>嗨，我是 XXX</h1>
+                <p>前端工程師｜熱愛純 CSS 與極致效能的網頁設計</p>
+                <a href="#portfolio" class="btn btn-primary">查看我的作品</a>
+            </div>
+        </section>
+
+        <!-- ====================== 關於我 ====================== -->
+        <section id="about" class="section">
+            <div class="container">
+                <!-- HTML 區塊插槽：關於我內容 -->
+                <h2 class="text-center">關於我</h2>
+                <p class="text-center">這裡放一段自我介紹…</p>
+            </div>
+        </section>
+
+        <!-- ====================== 技能 ====================== -->
+        <section id="skills" class="section" style="background: white;">
+            <div class="container">
+                <h2 class="text-center">專業技能</h2>
+                <div class="grid">
+                    <!-- HTML 區塊插槽：技能卡片（可重複） -->
+                    <div class="card">
+                        <h3>HTML5</h3>
+                        <p>語義化標籤、SEO 最佳化、可訪問性</p>
+                    </div>
+                    <div class="card">
+                        <h3>CSS3</h3>
+                        <p>Flexbox、Grid、動畫、RWD、自訂變數</p>
+                    </div>
+                    <div class="card">
+                        <h3>JavaScript</h3>
+                        <p>ES6+、非同步、DOM 操作</p>
+                    </div>
+                    <!-- 繼續加卡片 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================== 作品集 ====================== -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h2 class="text-center">作品集</h2>
+                <div class="grid">
+                    <!-- HTML 區塊插槽：作品卡片（可重複） -->
+                    <div class="card">
+                        <h3>專案名稱一</h3>
+                        <p>簡單說明文字…</p>
+                        <p><a href="https://github.com/yourname/project1" style="color:var(--color-primary);">查看範例 →</a></p>
+                    </div>
+                    <div class="card">
+                        <h3>專案名稱二</h3>
+                        <p>簡單說明文字…</p>
+                        <p><a href="https://github.com/yourname/project2" style="color:var(--color-primary);">查看範例 →</a></p>
+                    </div>
+                    <div class="card">
+                        <h3>專案名稱三</h3>
+                        <p>簡單說明文字…</p>
+                        <p><a href="https://github.com/yourname/project3" style="color:var(--color-primary);">查看範例 →</a></p>
+                    </div>
+                    <!-- 繼續加作品 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================== 經歷 ====================== -->
+        <section id="experience" class="section" style="background: white;">
+            <div class="container">
+                <h2 class="text-center">工作經歷</h2>
+                <!-- HTML 區塊插槽：時間軸或列表 -->
+                <p class="text-center">這裡可以放時間軸、列表或純文字經歷…</p>
+            </div>
+        </section>
+
+        <!-- ====================== 聯絡我 ====================== -->
+        <section id="contact" class="section">
+            <div class="container text-center">
+                <h2>聯絡我</h2>
+                <p>有任何合作機會或問題，歡迎隨時與我聯繫！</p>
+                <p>
+                    <a href="mailto:your@email.com">your@email.com</a> ｜ 
+                    <a href="https://github.com/yourname" target="_blank">GitHub</a> ｜ 
+                    <a href="https://linkedin.com/in/yourname" target="_blank">LinkedIn</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ====================== 頁尾 ====================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Greg，所有權利保留。</p>
+        </div>
+    </footer>
+
+</body>
+</html>
